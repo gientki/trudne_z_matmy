@@ -1,0 +1,349 @@
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+using namespace std;
+struct mac{
+				string nazwa;
+				float ** wym;
+			};
+		void j()
+		{int kol,wier;
+            cout<<"lie wierszy: ";
+			cin>>wier;
+			cout<<"ile kolumn: ";
+			cin>>kol;
+			mac A;
+			A.wym = new float * [wier];
+			for(int i=0;i<wier;i++)
+			A.wym[i] = new float [kol];
+			for(int i=0;i<wier;i++)
+			for(int j=0;j<kol;j++)
+			{
+				cout<<"wiersz: "<<i+1<<endl;
+				cout<<"kolumna: "<<j+1<<endl;
+				cin>>A.wym[i][j];
+			}
+				for(int i=0;i<wier;i++)
+				{
+				cout<<'|';
+			for(int j=0;j<kol;j++)
+			{
+				cout<<A.wym[i][j]<<" ";
+			}
+			cout<<'|'<<endl;
+		}
+		}
+		void d()
+		{
+            int kol,wier;
+            cout<<"wymiary macierzy"<<endl;
+            cout<<"lie wierszy: ";cin>>wier;
+			cout<<"ile kolumn: ";cin>>kol;
+			mac A;
+			A.wym = new float * [wier];
+			for(int i=0;i<wier;i++)
+                A.wym[i] = new float [kol];
+			mac B;
+			B.wym = new float * [wier];
+			for(int i=0;i<wier;i++)
+                B.wym[i] = new float [kol];
+           int e=0;
+              for(int i=0;i<wier;i++)
+			for(int j=0;j<kol;j++)
+			{cout<<"macierz pierwsza"<<endl;
+                    cout<<"wiersz: "<<i+1<<endl;
+                    cout<<"kolumna: "<<j+1<<endl;
+				cin>>A.wym[i][j];
+			}
+			 for(int i=0;i<wier;i++)
+			for(int j=0;j<kol;j++)
+			{cout<<"macierz druga"<<endl;
+                    cout<<"wiersz: "<<i+1<<endl;
+                    cout<<"kolumna: "<<j+1<<endl;
+				cin>>B.wym[i][j];
+			}
+            for(int i=0;i<wier;i++)
+				{
+				cout<<'|';
+			for(int j=0;j<kol;j++)
+			{
+				cout<<A.wym[i][j]+B.wym[i][j]<<" ";
+			}
+			cout<<'|'<<endl;
+		}
+		}
+        void t()
+        {
+            int kol,wier,kol2;
+            cout<<"wymiary macierzy pierwszej"<<endl;
+            cout<<"lie wierszy: ";
+			cin>>wier;
+			cout<<"ile kolumn: ";
+			cin>>kol;
+			mac A;
+			A.wym = new float * [wier];
+			for(int i=0;i<wier;i++)
+                A.wym[i] = new float [kol];
+            cout<<"wymiary drugiej"<<endl;
+            cout<<"lie wierszy: ";
+			cout<<kol<<endl;
+			cout<<"ile kolumn: ";
+			cin>>kol2;
+			mac B;
+			B.wym = new float * [kol];
+			for(int i=0;i<kol;i++)
+                B.wym[i] = new float [kol2];
+                mac C;
+                C.wym = new float * [wier];
+			for(int i=0;i<wier;i++)
+                C.wym[i] = new float [kol2];
+            for(int i=0;i<wier;i++)
+			for(int j=0;j<kol;j++)
+			{cout<<"macierz pierwsza"<<endl;
+                    cout<<"wiersz: "<<i+1<<endl;
+                    cout<<"kolumna: "<<j+1<<endl;
+				cin>>A.wym[i][j];
+			}
+			for(int i=0;i<kol;i++)
+			for(int j=0;j<kol2;j++)
+			{cout<<"macierz druga"<<endl;
+                    cout<<"wiersz: "<<i+1<<endl;
+                    cout<<"kolumna: "<<j+1<<endl;
+				cin>>B.wym[i][j];
+			}
+			int x=0;
+            for(int i=0;i<wier;i++)
+            for(int j=0;j<kol2;j++)
+            {
+                C.wym[i][j]=0;
+                for(int e=0;e<kol;e++) C.wym[i][j]+=A.wym[i][e]*B.wym[e][j];
+            }
+
+           for(int i=0;i<wier;i++)
+				{
+				cout<<'|';
+			 for(int j=0;j<kol2;j++)
+			{
+				cout<<C.wym[i][j]<<" ";
+			}
+			cout<<'|'<<endl;
+		}
+        }
+
+      float redukcja_macierzy(float **A,int kol,int wier,int wik);
+      float wyz(float **A,int x);
+        void c()
+        {
+            int wik;
+            cout<<"lie wierszy: ";
+			cin>>wik;
+			cout<<"ile kolumn: "<<wik<<endl;
+			mac A;
+			A.wym = new float * [wik];
+			for(int i=0;i<wik;i++)
+			A.wym[i] = new float [wik];
+			for(int i=0;i<wik;i++)
+			for(int j=0;j<wik;j++)
+			{cout<<"wiersz: "<<i+1<<endl;
+				cout<<"kolumna: "<<j+1<<endl;
+				cin>>A.wym[i][j];
+			}cout<<wyz(A.wym,wik);}
+        float wyz(float **A,int wik)
+        {float x=0,z=0,m=0;
+			switch (wik)
+                {case 1:{return A[0][0];}break;
+                    case 2:{return (A[0][0]*A[1][1])-(A[1][0]*A[0][1]);}break;
+                    case 3:{return ((A[0][0]*A[1][1]*A[2][2]+A[0][1]*A[1][2]*A[2][0]+A[0][2]*A[1][0]*A[2][1])-(A[2][0]*A[1][1]*A[0][2]+A[2][1]*A[1][2]*A[0][0]+A[2][2]*A[1][0]*A[0][1]));}break;
+                    default:
+                    {
+                        for(int i=0;i<wik;i++)
+                        x+=pow(-1,2+i)*redukcja_macierzy(A,i,0,wik)*A[0][i];
+                      return x;
+                    }break;
+
+                }
+        }
+        float redukcja_macierzy(float **A,int kol,int wier,int wik)
+        {
+
+            float p;
+            mac X;
+            X.wym = new float * [wik];
+            for(int i=0;i<wik;i++)
+			{
+				X.wym[i] = new float [wik];
+			}
+			for(int i=0;i<wik;i++)
+			for(int j=0;j<wik;j++)
+			{
+                X.wym[i][j]=A[i][j];
+
+                if(i==wier)X.wym[i][j]=0;
+                if(j==kol)X.wym[i][j]= 0;
+			}
+            mac Y;
+            Y.wym = new float * [wik];
+            for(int i=0;i<wik;i++)
+			{
+				Y.wym[i] = new float [wik];
+			}
+			int e=0,r=0,t=pow(wik-1,2);
+			float tab[t];
+			//tab = new float (t);
+            for(int i=0;i<wik;i++)
+            {//cout<<'|';
+            r=0;
+                for(int j=0;j<wik;j++)
+                {
+                    if((i!=wier)&&(j!=kol))
+                     {
+						//cout<<X.wym[i][j]<<" ";
+                         tab[e]=X.wym[i][j];
+                    		e++;
+                     }
+                }//cout<<'|'<<endl;
+            }
+		  		for(int i=0;i<pow(e,0.5);i++)
+				  {
+				  for(int j=0;j<pow(e,0.5);j++)
+		           {
+		           		Y.wym[i][j]=tab[r];
+		        		r++;
+				   }
+					  }
+
+		int v = pow(e,0.5);
+		return wyz(Y.wym,v);
+       // return **Y.wym;
+        }
+        void p()
+        {
+            int wik;
+            cout<<"lie wierszy: ";
+			cin>>wik;
+			cout<<"ile kolumn: "<<wik<<endl;
+			mac A,Adop;
+			A.wym = new float * [wik];
+			Adop.wym = new float * [wik];
+			for(int i=0;i<wik;i++)
+			{
+				A.wym[i]    = new float [wik];
+				Adop.wym[i] = new float [wik];
+			}
+			for(int i=0;i<wik;i++)
+			for(int j=0;j<wik;j++)
+			{
+				cout<<"wiersz: "<<i+1<<endl;
+				cout<<"kolumna: "<<j+1<<endl;
+				cin>>A.wym[i][j];
+			}
+          float det = wyz(A.wym,wik);
+          if (det == 0) cout<<"nie mozna wykonac takiej operacji ze wzgledu na to ze wyznacznik macierzy A wynosi 0";
+          else {
+
+                for(int i=0;i<wik;i++)
+                {
+                     for(int j=0;j<wik;j++)
+                        {
+                            Adop.wym[i][j]=pow(-1,i+j)*redukcja_macierzy(A.wym,j,i,wik);
+
+                        }
+                   
+                }
+                for(int i=0;i<wik;i++)
+                {
+                     for(int j=0;j<wik;j++)
+                        {
+                            cout<<1/det*Adop.wym[j][i]<<" ";
+                        }
+                        cout<<endl;}}
+        }
+        void s()
+        {
+            int wik;
+            cout<<"lie wierszy: ";
+			cin>>wik;
+			cout<<"ile kolumn: "<<wik<<endl;
+			mac A,Adop,B,C;
+			A.wym = new float * [wik];
+			B.wym = new float * [wik];
+			C.wym = new float * [wik];
+			Adop.wym = new float * [wik];
+			for(int i=0;i<wik;i++)
+			{
+				A.wym[i]    = new float [wik];
+				B.wym[i]    = new float [wik];
+				C.wym[i]    = new float [wik];
+				Adop.wym[i] = new float [wik];
+			}
+			for(int e=1;e<=3;e++)
+			for(int i=0;i<wik;i++)
+			for(int j=0;j<wik;j++)
+			{
+            if(e==1)cout<<"macierz A"<<endl;
+			if(e==2)cout<<"macierz B"<<endl;
+			if(e==3)cout<<"macierz C"<<endl;
+				cout<<"wiersz: "<<i+1<<endl;
+				cout<<"kolumna: "<<j+1<<endl;
+            if(e==1)cin>>A.wym[i][j];
+			if(e==2)cin>>B.wym[i][j];
+			if(e==3)cin>>C.wym[i][j];
+			}
+          float det = wyz(A.wym,wik);
+          if (det == 0) cout<<"nie mozna wykonac takiej operacji ze wzgledu na to ze wyznacznik macierzy A wynosi 0";
+          else {
+
+                for(int i=0;i<wik;i++)
+                {
+                     for(int j=0;j<wik;j++)
+                        {
+                            Adop.wym[i][j]=pow(-1,i+j)*redukcja_macierzy(A.wym,j,i,wik);
+                        };
+                }
+                for(int i=0;i<wik;i++)
+                {
+                     for(int j=0;j<wik;j++)
+                        A.wym[i][j]=1/det*Adop.wym[j][i];
+                }
+                for(int i=0;i<wik;i++)
+                     for(int j=0;j<wik;j++)
+                            C.wym[i][i]-=B.wym[i][j];
+                 for(int i=0;i<wik;i++)
+            for(int j=0;j<wik;j++)
+            {
+                B.wym[i][j]=0;
+                for(int e=0;e<wik;e++) B.wym[i][j]+=A.wym[i][e]*C.wym[e][j];
+            }cout<<"macierz X wynosi:"<<endl;
+            for(int i=0;i<wik;i++)
+				{
+				cout<<'|';
+			for(int j=0;j<wik;j++)
+			{
+				cout<<B.wym[i][j]<<" ";
+			}
+			cout<<'|'<<endl;
+		}
+          }
+        }
+int main()
+{cout<<"1.Wypisywanie macierzy na ekranie konsoli"<<endl;
+	cout<<"2.Dodawanie dwoch macierzy o wspolczynnikach rzeczywistych."<<endl;
+	cout<<"3.Mnozenie macierzy o wspolczynnikach rzeczywistych."<<endl;
+	cout<<"4.Liczenie wyznacznika macierzy."<<endl;
+	cout<<"5.Wyznaczanie macierzy odwrotnej."<<endl;
+	cout<<"6.Rozwiazywanie rownania AX + B = C."<<endl;
+	int x;
+	cin>>x;
+	switch (x)
+	{case 1:{j();}break;
+		case 2:{d();}break;
+		case 3:{t();}break;
+		case 4:{c();}break;
+		case 5:{p();}break;
+		case 6:{s();}break;
+		default:
+            cout<<"menu nie ma takiej opcji jak: "<<x;
+    break;
+	}
+	return 0;
+}
